@@ -1,1 +1,1 @@
-go build -o ~/dotfiles/scripts/setup
+go build -o ~/dotfiles/bin/setup
