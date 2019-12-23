@@ -4,14 +4,9 @@ import (
   "fmt"
   "os"
   "path/filepath"
-
   "gopkg.in/src-d/go-git.v4"
 )
 
-type Gits struct {
-  url string
-  dir string
-}
 
 func  git_clone(repo Gits) string{
   var err error
@@ -45,19 +40,9 @@ func symlink(file string) {
   fmt.Printf("create symlink -> " + symfile + "\n")
 }
 
-
 func main() {
-  var repos []Gits
-  var rcfiles []string
-
-  repos = append(repos, Gits{"https://github.com/anyenv/anyenv",      filepath.Join(os.Getenv("HOME"), ".anyenv") })
-  repos = append(repos, Gits{"https://github.com/mollifier/anyframe", filepath.Join(os.Getenv("HOME"), ".temp/anyframe")})
-  rcfiles = append(rcfiles, "vimrc")
-  rcfiles = append(rcfiles, "zshrc")
-  rcfiles = append(rcfiles, "bashrc")
-  rcfiles = append(rcfiles, "aliasrc")
-  rcfiles = append(rcfiles, "tmux.conf")
-  rcfiles = append(rcfiles, "hyper.js")
+  repos   := gits()
+  rcfiles := rcs()
 
   for i := 0; i < len(repos); i++ {
     var res string
